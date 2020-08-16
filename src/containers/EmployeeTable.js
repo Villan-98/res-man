@@ -5,7 +5,7 @@ class EmployeeTable extends Component{
 	render(){
 		return (
 
-				<table class="table table-bordered">
+				<table className="table table-bordered">
 					<thead>
 						<tr>
 							<th>Name</th>
