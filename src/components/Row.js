@@ -1,10 +1,16 @@
 import React from 'react'
 import FormModal from './FormModal'
-function Row({empDetail,editEmployee})
+function Row({empDetail,editEmployee,deleteEmployeeFun})
 {
 		const check=(empDetail.availability)?"checked":"";
 		const flag=true;
-		
+		function handleDelete(e)
+	  	{
+	  		console.log("in Delete")
+	  		deleteEmployeeFun({
+	  			'id':empDetail.id
+	  		})
+	  	}
 		return (
 
 
@@ -20,7 +26,7 @@ function Row({empDetail,editEmployee})
 
 					<td>
 							<FormModal editEmployee={flag} empDetail={empDetail} editEmployeeFun={editEmployee}/>
-		                    <button type="button" className="btn btn-outline-danger btn-sm">
+		                    <button type="button" onClick={handleDelete} className="btn btn-outline-danger btn-sm">
 								Delete
 						</button>
 					</td>

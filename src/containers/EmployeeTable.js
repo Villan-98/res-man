@@ -1,11 +1,11 @@
 import React,{ Component } from 'react'
 import Row from '../components/Row'
 
-function EmployeeTable ({employees,editEmployee}){
+function EmployeeTable ({employees,editEmployee,deleteEmployeeFun}){
 		
 		let rows=employees.map(emp=>
 
-						<Row key={emp.id} empDetail={emp} editEmployee={editEmployee}></Row>
+						<Row key={emp.id} empDetail={emp} editEmployee={editEmployee}  deleteEmployeeFun={deleteEmployeeFun}></Row>
 		)
 		return (
 

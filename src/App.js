@@ -8,52 +8,62 @@ class App extends Component{
     super()
     this.state={
         employees:[
-        {
-          id:1,
-          name:"Sachin",
+        // {
+        //   id:1,
+        //   name:"Sachin",
 
-          gender:"Male",
+        //   gender:"Male",
 
-          age:12,
-          designation:"Wsdfsdfs",
+        //   age:12,
+        //   designation:"Wsdfsdfs",
 
-          department:"Frontend Development",
+        //   department:"Frontend Development",
 
-          joiningDate:"2020-08-11",
+        //   joiningDate:"2020-08-11",
 
-          availability:true,
-        }
-        ,
-        {
-          id:2,
-          name:"Sachin",
+        //   availability:true,
+        // }
+        // ,
+        // {
+        //   id:2,
+        //   name:"Sachin",
 
-          gender:"Male",
-          age:12,
-          designation:"Wsdfsdfs",
+        //   gender:"Male",
+        //   age:12,
+        //   designation:"Wsdfsdfs",
 
-          department:"Frontend Development",
+        //   department:"Frontend Development",
 
-          joiningDate:"2020-08-11",
+        //   joiningDate:"2020-08-11",
 
-          availability:true,
-        },
-        {
-          id:3,
-          name:"Sachin",
+        //   availability:true,
+        // },
+        // {
+        //   id:3,
+        //   name:"Sachin",
 
-          gender:"Male",
+        //   gender:"Male",
 
-          age:12,
-          designation:"Wsdfsdfs",
+        //   age:12,
+        //   designation:"Wsdfsdfs",
 
-          department:"Frontend Development",
+        //   department:"Frontend Development",
 
-          joiningDate:"2020-08-11",
+        //   joiningDate:"2020-08-11",
 
-          availability:false,
-        }
+        //   availability:false,
+        // }
       ]
+    }
+    // function getAllFromLocalStorage(string)
+    // {
+
+    // }
+    console.log(localStorage.employees)
+    localStorage.employees===undefined?
+    this.state={employees:[]}:
+    this.state={
+      employees:JSON.parse(localStorage.employees)
     }
   }
   addNewEmployee=(data)=>{
@@ -63,9 +73,12 @@ class App extends Component{
     alert("Employee Detail added successfuly")
     this.setState({
         employees:empData
-      })
+      },this.updateLocalStorage)
 
   }
+  updateLocalStorage=()=>{
+        localStorage.employees=JSON.stringify(this.state.employees)
+    }
   editEmployee=(id,data)=>{
     console.log("editEmployee")
      let temp=this.state.employees
@@ -75,8 +88,26 @@ class App extends Component{
               console.log(x)
             }
         })
-        this.setState({employees:temp})
+        this.setState({employees:temp},this.updateLocalStorage)
 
+  }
+  deleteEmployeeFun=(data)=>{
+    console.log("deleteEmployeeFun")
+
+    let temp=this.state.employees
+    console.log(temp.length)
+    for(let i=0;i<temp.length;i++)
+    {
+      if(temp[i].id===data.id)
+      {
+        temp.splice(i,1);
+        break;
+      }
+    }
+    console.log(temp.length,data.id)
+    this.setState({
+      employees:temp
+    },this.updateLocalStorage)
   }
   render()
   {
@@ -84,7 +115,7 @@ class App extends Component{
       <div className="App">
        <h1 >Resource Management App</h1>
        <Navbar/>
-       <Dashboard addNewEmployee={this.addNewEmployee} editEmployee={this.editEmployee} employees={this.state.employees} />
+       <Dashboard addNewEmployee={this.addNewEmployee} editEmployee={this.editEmployee} deleteEmployeeFun={this.deleteEmployeeFun} employees={this.state.employees} />
       </div>
     );
   }
