@@ -1,8 +1,11 @@
 import React,{ Component } from 'react'
 import Row from '../components/Row'
 
-class EmployeeTable extends Component{
-	render(){
+function EmployeeTable ({employees}){
+		let rows=employees.map(emp=>
+
+						<Row empDetail={emp}></Row>
+		)
 		return (
 
 				<table className="table table-bordered">
@@ -15,12 +18,11 @@ class EmployeeTable extends Component{
 						</tr>
 					</thead>
 					<tbody>
-						<Row name="Peter" department="Web"></Row>
-						<Row name="Sachin" department="Compititive"></Row>
+						{rows}
 					</tbody>
 				</table>
 
 		)
-	}
+	
 }
 export default EmployeeTable;
