@@ -98,20 +98,33 @@ class FormModal extends Component
   	}
   	handleSave(e)
   	{
-  	
-  		this.props.addNewEmployee({
+  		if(this.state.name.length===0 || this.state.department.length==0||this.state.designation.length===0
+  			||this.state.joiningDate.length===0)
+  		{
+  			alert("Please fill the input boxes")
+
+  		}
+  		else if (this.state.age.length===0||this.state.age===0)
+  		{
+  			alert("Please fill valid value of age")
+  		}
+  		else 
+  		{
+  			this.props.addNewEmployee({
   			'name':this.state.name,
   			'availability':true,
   			'department':this.state.department,
   			'doj':this.state.joiningDate,
   			'designation':this.state.designation,
   			'age':this.state.age,
-  			'id':this.state.id
+  			'id':Math.random()
 
-  		})
-  		this.setState({
-  			show:false
-  		})
+	  		})
+	  		this.setState({
+	  			show:false
+	  		})
+  		}
+  		
   	}
   	handleUpdate(e)
   	{

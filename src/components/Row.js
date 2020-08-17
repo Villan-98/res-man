@@ -21,7 +21,7 @@ function Row({empDetail,editEmployee})
 					<td>
 							<FormModal editEmployee={flag} empDetail={empDetail} editEmployeeFun={editEmployee}/>
 		                    <button type="button" className="btn btn-outline-danger btn-sm">
-							<i className="fa fa-trash"></i>&nbsp; Delete
+								Delete
 						</button>
 					</td>
 				</tr>

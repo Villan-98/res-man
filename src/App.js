@@ -60,9 +60,11 @@ class App extends Component{
     console.log(this.state.employees)
     let empData=this.state.employees
     empData.unshift(data) 
+    alert("Employee Detail added successfuly")
     this.setState({
         employees:empData
       })
+
   }
   editEmployee=(id,data)=>{
     console.log("editEmployee")
