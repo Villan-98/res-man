@@ -1,5 +1,6 @@
 import React,{ Component } from 'react'
 import Row from '../components/Row'
+import {Table} from 'react-bootstrap'
 
 function EmployeeTable ({employees,editEmployee,deleteEmployeeFun}){
 		
@@ -9,19 +10,22 @@ function EmployeeTable ({employees,editEmployee,deleteEmployeeFun}){
 		)
 		return (
 
-				<table className="table table-bordered">
+				<Table striped bordered hover>
 					<thead>
 						<tr>
 							<th>Name</th>
+							<th>Age</th>
+							<th>Gender</th>
 							<th>Department</th>
+							<th>Designation</th>
 							<th>Available</th>
-							<th>View Details</th>
+							<th>Action</th>
 						</tr>
 					</thead>
 					<tbody>
 						{rows}
 					</tbody>
-				</table>
+				</Table>
 
 		)
 	
