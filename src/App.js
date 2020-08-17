@@ -22,14 +22,21 @@ class App extends Component{
       ]
     }
   }
-
+  addNewEmployee=(data)=>{
+    console.log(this.state.employees)
+    let empData=this.state.employees
+    empData.unshift(data)
+    this.setState({
+        employees:empData
+      })
+  }
   render()
   {
     return (
       <div className="App">
        <h1 >Resource Management App</h1>
        <Navbar/>
-       <Dashboard employees={this.state.employees} />
+       <Dashboard addNewEmployee={this.addNewEmployee} employees={this.state.employees} />
        <EmpForm/>
       </div>
     );
