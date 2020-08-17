@@ -6,59 +6,7 @@ class App extends Component{
   constructor()
   {
     super()
-    this.state={
-        employees:[
-        // {
-        //   id:1,
-        //   name:"Sachin",
-
-        //   gender:"Male",
-
-        //   age:12,
-        //   designation:"Wsdfsdfs",
-
-        //   department:"Frontend Development",
-
-        //   joiningDate:"2020-08-11",
-
-        //   availability:true,
-        // }
-        // ,
-        // {
-        //   id:2,
-        //   name:"Sachin",
-
-        //   gender:"Male",
-        //   age:12,
-        //   designation:"Wsdfsdfs",
-
-        //   department:"Frontend Development",
-
-        //   joiningDate:"2020-08-11",
-
-        //   availability:true,
-        // },
-        // {
-        //   id:3,
-        //   name:"Sachin",
-
-        //   gender:"Male",
-
-        //   age:12,
-        //   designation:"Wsdfsdfs",
-
-        //   department:"Frontend Development",
-
-        //   joiningDate:"2020-08-11",
-
-        //   availability:false,
-        // }
-      ]
-    }
-    // function getAllFromLocalStorage(string)
-    // {
-
-    // }
+    
     console.log(localStorage.employees)
     localStorage.employees===undefined?
     this.state={employees:[]}:
@@ -79,15 +27,18 @@ class App extends Component{
   updateLocalStorage=()=>{
         localStorage.employees=JSON.stringify(this.state.employees)
     }
-  editEmployee=(id,data)=>{
-    console.log("editEmployee")
+  editEmployee=(data)=>{
      let temp=this.state.employees
-        temp.forEach(x=> {
-            // mutate the urgent and set it...
-            if(x.id===id){
-              console.log(x)
+         for(let i=0;i<temp.length;i++)
+          {
+            if(temp[i].id===data.id)
+            {
+              console.log("break")
+              temp[i]=data
+              break;
             }
-        })
+          }
+          console.log(temp)
         this.setState({employees:temp},this.updateLocalStorage)
 
   }

@@ -10,7 +10,7 @@ class FormModal extends Component
 		console.log(props.employees)
 		this.state={
 			show:false,
-			id:props.editEmployee? props.empDetail.name:"",
+			id:props.editEmployee? props.empDetail.id:"",
 
 			name:props.editEmployee? props.empDetail.name:"",
 
@@ -114,10 +114,11 @@ class FormModal extends Component
   			'name':this.state.name,
   			'availability':true,
   			'department':this.state.department,
-  			'doj':this.state.joiningDate,
+  			'joiningDate':this.state.joiningDate,
   			'designation':this.state.designation,
   			'age':this.state.age,
-  			'id':Math.random()
+  			'id':Math.random(),
+  			'gender':this.state.gender
 
 	  		})
 	  		this.setState({
@@ -133,16 +134,17 @@ class FormModal extends Component
   			'name':this.state.name,
   			'availability':true,
   			'department':this.state.department,
-  			'doj':this.state.joiningDate,
+  			'joiningDate':this.state.joiningDate,
   			'designation':this.state.designation,
   			'age':this.state.age,
-  			'id':this.state.id
+  			'id':this.state.id,
+  			'gender':this.state.gender
   		})
   		this.setState({
   			show:false
   		})
   	}
-  	
+
   	render()
   	{
   		return (
