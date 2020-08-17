@@ -2,7 +2,6 @@ import React,{Component} from 'react';
 import './App.css';
 import Navbar from './components/Navbar'
 import Dashboard from './containers/Dashboard'
-import EmpForm from './components/EmpForm.js'
 class App extends Component{
   constructor()
   {
@@ -10,14 +9,49 @@ class App extends Component{
     this.state={
         employees:[
         {
-            name: "Sachin",
-            departement:"Web Developer",
-            availability:true,
+          id:1,
+          name:"Sachin",
+
+          gender:"Male",
+
+          age:12,
+          designation:"Wsdfsdfs",
+
+          department:"Frontend Development",
+
+          joiningDate:"2020-08-11",
+
+          availability:true,
+        }
+        ,
+        {
+          id:2,
+          name:"Sachin",
+
+          gender:"Male",
+          age:12,
+          designation:"Wsdfsdfs",
+
+          department:"Frontend Development",
+
+          joiningDate:"2020-08-11",
+
+          availability:true,
         },
         {
-            name: "Peter",
-            departement:"Back ENd Engineer",
-            availability:false,
+          id:3,
+          name:"Sachin",
+
+          gender:"Male",
+
+          age:12,
+          designation:"Wsdfsdfs",
+
+          department:"Frontend Development",
+
+          joiningDate:"2020-08-11",
+
+          availability:false,
         }
       ]
     }
@@ -25,10 +59,22 @@ class App extends Component{
   addNewEmployee=(data)=>{
     console.log(this.state.employees)
     let empData=this.state.employees
-    empData.unshift(data)
+    empData.unshift(data) 
     this.setState({
         employees:empData
       })
+  }
+  editEmployee=(id,data)=>{
+    console.log("editEmployee")
+     let temp=this.state.employees
+        temp.forEach(x=> {
+            // mutate the urgent and set it...
+            if(x.id===id){
+              console.log(x)
+            }
+        })
+        this.setState({employees:temp})
+
   }
   render()
   {
@@ -36,8 +82,7 @@ class App extends Component{
       <div className="App">
        <h1 >Resource Management App</h1>
        <Navbar/>
-       <Dashboard addNewEmployee={this.addNewEmployee} employees={this.state.employees} />
-       <EmpForm/>
+       <Dashboard addNewEmployee={this.addNewEmployee} editEmployee={this.editEmployee} employees={this.state.employees} />
       </div>
     );
   }

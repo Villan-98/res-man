@@ -10,16 +10,30 @@ class FormModal extends Component
 		console.log(props.employees)
 		this.state={
 			show:false,
-			name:"",
-			gender:"",
-			age:0,
-			designation:"",
-			department:"",
-			joiningDate:"",
+			id:props.editEmployee? props.empDetail.name:"",
+
+			name:props.editEmployee? props.empDetail.name:"",
+
+			gender:props.editEmployee? props.empDetail.gender:"",
+
+			age:props.editEmployee? props.empDetail.age:0,
+
+			designation:props.editEmployee? props.empDetail.designation:"",
+
+			department:props.editEmployee? props.empDetail.department:"",
+
+			joiningDate:props.editEmployee? props.empDetail.joiningDate:"",
+
 			availability:true,
-			employeeData:props.employees
+
+			buttonName:props.editEmployee?"Edit":"Add Employee",
+
+			modalHeading:props.editEmployee?"Edit Detail":"Add Employee",
+
+			employeeData:props.employees,
 		
 		}
+		console.log(props.editEmployee)
 		this.handleSave=this.handleSave.bind(this)
 		this.handleNameChange=this.handleNameChange.bind(this)
 		this.handleDesignationChange=this.handleDesignationChange.bind(this)
@@ -27,6 +41,7 @@ class FormModal extends Component
 		this.handleDateChange=this.handleDateChange.bind(this)
 		this.handleGenderChange=this.handleGenderChange.bind(this)
 		this.handleDepartmentChange=this.handleDepartmentChange.bind(this)
+		this.handleUpdate =this.handleUpdate.bind(this)
 	}
   	handleClose = () => this.setShow(false);
   	handleShow = () => this.setShow(true);
@@ -90,8 +105,28 @@ class FormModal extends Component
   			'department':this.state.department,
   			'doj':this.state.joiningDate,
   			'designation':this.state.designation,
-  			'age':this.state.age
+  			'age':this.state.age,
+  			'id':this.state.id
 
+  		})
+  		this.setState({
+  			show:false
+  		})
+  	}
+  	handleUpdate(e)
+  	{
+  		console.log("in the update")
+  		this.props.editEmployeeFun({
+  			'name':this.state.name,
+  			'availability':true,
+  			'department':this.state.department,
+  			'doj':this.state.joiningDate,
+  			'designation':this.state.designation,
+  			'age':this.state.age,
+  			'id':this.state.id
+  		})
+  		this.setState({
+  			show:false
   		})
   	}
   	render()
@@ -99,12 +134,12 @@ class FormModal extends Component
   		return (
 		    <>
 		      <Button variant="primary" onClick={this.handleShow}>
-		        Add Employee
+		        {this.state.buttonName}
 		      </Button>
 
 		      <Modal show={this.state.show} onHide={this.handleClose}>
 		        <Modal.Header closeButton>
-		          <Modal.Title>Modal heading</Modal.Title>
+		          <Modal.Title>{this.state.modalHeading}</Modal.Title>
 		        </Modal.Header>
 		        <Modal.Body>
 		        <Form>
@@ -113,10 +148,8 @@ class FormModal extends Component
 				      <Form.Label>Name</Form.Label>
 				      <Form.Control type="text" value={this.state.name}  onChange={this.handleNameChange} placeholder="Name" />
 				    </Form.Group>
-
-
 			    	<Form.Group as={Col} controlId="empGender">
-					    <Form.Label>Example select</Form.Label>
+					    <Form.Label>Gender</Form.Label>
 					    <Form.Control value={this.state.gender} onChange={this.handleGenderChange} as="select">
 					      <option value="">Select</option>
 					      <option value="Male">Male</option>
@@ -157,7 +190,7 @@ class FormModal extends Component
 				</Form>
 		        </Modal.Body>
 		        <Modal.Footer>
-		          <Button variant="success" onClick={this.handleSave}>
+		          <Button variant="success" onClick={this.props.editEmployee? this.handleUpdate:this.handleSave}>
 		            Success
 		          </Button>
 		          <Button variant="danger" onClick={this.handleClose}>
