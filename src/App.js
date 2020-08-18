@@ -7,10 +7,10 @@ class App extends Component{
   {
     super()
     
-    console.log(localStorage.employees)
-    localStorage.employees===undefined?
-    this.state={employees:[]}:
-    this.state={
+      console.log(localStorage.employees)
+      localStorage.employees===undefined?
+      this.state={employees:[]}:
+      this.state={
       employees:JSON.parse(localStorage.employees)
     }
   }
@@ -60,13 +60,31 @@ class App extends Component{
       employees:temp
     },this.updateLocalStorage)
   }
+  searchResultFun=(data)=>{
+    console.log("search result")
+    let temp=JSON.parse(localStorage.employees)
+    let result=[]
+    console.log(data.pat)
+    for(let i=0;i<temp.length;i++)
+    {
+        if(temp[i].name.includes(data.pat)||temp[i].designation .includes(data.pat))
+        {
+          result.push(temp[i])
+        }
+    }
+    console.log(result)
+    this.setState({
+      employees:result
+    })
+  }
   render()
   {
     return (
       <div className="App">
        <h1 >Resource Management App</h1>
        <Navbar/>
-       <Dashboard addNewEmployee={this.addNewEmployee} editEmployee={this.editEmployee} deleteEmployeeFun={this.deleteEmployeeFun} employees={this.state.employees} />
+       <Dashboard addNewEmployee={this.addNewEmployee} editEmployee={this.editEmployee} 
+       deleteEmployeeFun={this.deleteEmployeeFun} employees={this.state.employees} searchResultFun={this.searchResultFun}/>
       </div>
     );
   }

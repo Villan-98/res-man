@@ -2,6 +2,7 @@ import React,{Fragment,useState} from 'react'
 import Button from 'react-bootstrap/Button'
 
 import Temp from './FormModal'
+import SearchBar from  './SearchBar'
 function Summary(props)
 {
 	return (
@@ -15,6 +16,7 @@ function Summary(props)
 					</h5>
 					​<Temp addNewEmployee={props.addNewEmployee} employees={props.employees}/>
 					</div>
+					<SearchBar searchResultFun={props.searchResultFun}/>
 			</div>
 
 			​
