@@ -29,7 +29,7 @@ class PageButton extends Component{
 				<div class="row">
 					<div class="col-4 my-2">
 					<input type="text" value={this.state.query} onChange={this.handleChange} placeholder="Enter Page No." />
-					<Button  className="my-2"onClick={this.handleSearch} variant="primary">Search</Button>
+					<Button  className="my-2"onClick={this.handlePageNo} variant="primary">Search</Button>
 					</div>
 				</div>
 			

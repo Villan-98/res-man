@@ -8,7 +8,6 @@ class App extends Component{
   {
     super()
     
-      console.log(localStorage.employees)
       if(localStorage.employees===undefined)
       {
         this.state={employees:[],searchEmployees:[],pageNo:1}
@@ -23,7 +22,6 @@ class App extends Component{
       } 
   }
   addNewEmployee=(data)=>{
-    console.log(this.state.employees)
     let empData=this.state.employees
     empData.unshift(data) 
     alert("Employee Detail added successfuly")
@@ -38,7 +36,6 @@ class App extends Component{
           {
             if(temp[i].id===data.id)
             {
-              console.log("break")
               temp[i]=data
               break;
             }
@@ -47,10 +44,8 @@ class App extends Component{
 
   }
   deleteEmployeeFun=(data)=>{
-    console.log("deleteEmployeeFun")
 
     let temp=this.state.employees
-    console.log(temp.length)
     for(let i=0;i<temp.length;i++)
     {
       if(temp[i].id===data.id)
@@ -59,14 +54,11 @@ class App extends Component{
         break;
       }
     }
-    console.log(temp.length,data.id)
     this.sortByAvailability(temp);
   }
   searchResultFun=(data)=>{
-    console.log("search result")
     let temp=JSON.parse(localStorage.employees)
     let result=[]
-    console.log(data.pat)
     for(let i=0;i<temp.length;i++)
     {
         if(temp[i].name.includes(data.pat)||temp[i].designation .includes(data.pat))
@@ -98,7 +90,6 @@ class App extends Component{
       }
         return 0;
     })
-    console.log(data)
     this.setState({
       employees:data,
       searchEmployees:data,
@@ -106,7 +97,7 @@ class App extends Component{
   }
   showPage=(data)=>
   {
-      console.log("show page")
+      
       this.setState({
         pageNo:data.pno
       })

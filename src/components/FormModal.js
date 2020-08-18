@@ -7,7 +7,6 @@ class FormModal extends Component
 	constructor(props)
 	{
 		super(props)
-		console.log(props.employees)
 		this.state={
 			show:false,
 			id:props.editEmployee? props.empDetail.id:"",
@@ -35,7 +34,6 @@ class FormModal extends Component
 			employeeData:props.employees,
 		
 		}
-		console.log(props.editEmployee)
 		this.handleSave=this.handleSave.bind(this)
 		this.handleNameChange=this.handleNameChange.bind(this)
 		this.handleDesignationChange=this.handleDesignationChange.bind(this)
@@ -57,35 +55,31 @@ class FormModal extends Component
   	}
   	handleDateChange(e)
   	{
-  		console.log(e.target.value)
+  		
   		this.setState({
   			joiningDate:e.target.value
   		})
   	}
   	handleNameChange(e)
   	{
-  		console.log(e.target.value)
   		this.setState({
   			name:e.target.value
   		})
   	}
   	handleAgeChange(e)
   	{
-  		console.log(e.target.value)
   		this.setState({
   			age:e.target.value
   		})
   	}
   	handleDesignationChange(e)
   	{
-  		console.log(e.target.value)
   		this.setState({
   			designation:e.target.value
   		})
   	}
   	handleGenderChange(e)
   	{
-  		console.log(e.target.value)
   		this.setState({
   			gender:e.target.value
   		})
@@ -93,7 +87,6 @@ class FormModal extends Component
 
   	handleDepartmentChange(e)
   	{
-  		console.log(e.target.value)
   		this.setState({
   			department:e.target.value
   		})
@@ -149,7 +142,6 @@ class FormModal extends Component
   	}
   	handleUpdate(e)
   	{
-  		console.log("in the update")
   		this.props.editEmployeeFun({
   			'name':this.state.name,
   			'availability':this.state.availability,
