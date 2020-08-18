@@ -8,25 +8,29 @@ class App extends Component{
     super()
     
       console.log(localStorage.employees)
-      localStorage.employees===undefined?
-      this.state={employees:[]}:
-      this.state={
-      employees:JSON.parse(localStorage.employees)
-    }
+      if(localStorage.employees===undefined)
+      {
+        this.state={employees:[],searchEmployees:[]}
+      }
+      else
+      {
+            this.state={
+          employees:JSON.parse(localStorage.employees),
+          searchEmployees:JSON.parse(localStorage.employees)
+        }
+      } 
   }
   addNewEmployee=(data)=>{
     console.log(this.state.employees)
     let empData=this.state.employees
     empData.unshift(data) 
     alert("Employee Detail added successfuly")
-    this.setState({
-        employees:empData
-      },this.updateLocalStorage)
-
+    this.updateLocalStorage();
+    this.sortByAvailability(empData);
   }
   updateLocalStorage=()=>{
-        localStorage.employees=JSON.stringify(this.state.employees)
-    }
+      localStorage.employees=JSON.stringify(this.state.employees)
+  }
   editEmployee=(data)=>{
      let temp=this.state.employees
          for(let i=0;i<temp.length;i++)
@@ -38,8 +42,7 @@ class App extends Component{
               break;
             }
           }
-          console.log(temp)
-        this.setState({employees:temp},this.updateLocalStorage)
+          this.sortByAvailability(temp)
 
   }
   deleteEmployeeFun=(data)=>{
@@ -56,9 +59,7 @@ class App extends Component{
       }
     }
     console.log(temp.length,data.id)
-    this.setState({
-      employees:temp
-    },this.updateLocalStorage)
+    this.sortByAvailability(temp);
   }
   searchResultFun=(data)=>{
     console.log("search result")
@@ -72,10 +73,35 @@ class App extends Component{
           result.push(temp[i])
         }
     }
-    console.log(result)
-    this.setState({
-      employees:result
+    result.sort(function(a,b){
+
+      return a.availability?-1:1
     })
+    this.setState({
+      searchEmployees:result
+    })
+    
+  }
+  sortByAvailability(data)
+  {
+
+    data.sort(function(a,b){
+
+      if(a.availability)
+      {
+        return -1
+      }
+      else if(b.availability)
+      {
+        return 1;
+      }
+        return 0;
+    })
+    console.log(data)
+    this.setState({
+      employees:data,
+      searchEmployees:data
+    },this.updateLocalStorage)
   }
   render()
   {
@@ -84,7 +110,7 @@ class App extends Component{
        <h1 >Resource Management App</h1>
        <Navbar/>
        <Dashboard addNewEmployee={this.addNewEmployee} editEmployee={this.editEmployee} 
-       deleteEmployeeFun={this.deleteEmployeeFun} employees={this.state.employees} searchResultFun={this.searchResultFun}/>
+       deleteEmployeeFun={this.deleteEmployeeFun} employees={this.state.searchEmployees} searchResultFun={this.searchResultFun}/>
       </div>
     );
   }
