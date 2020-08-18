@@ -23,8 +23,16 @@ class SearcBar extends Component{
 	render(){
 		return(
 			<>
-			<Form.Control type="text" value={this.state.query} onChange={this.handleChange}placeholder="Search" />
-			<Button onClick={this.handleSearch} variant="primary">Search</Button>
+
+			<div class="d-flex justify-content-center">
+				<div class="row">
+					<div class="col-4">
+					<input type="text" value={this.state.query} onChange={this.handleChange} placeholder="Search" />
+					<Button  className="my-2"onClick={this.handleSearch} variant="primary">Search</Button>
+					</div>
+				</div>
+			
+			</div>	
 			</>
 		)
 	}

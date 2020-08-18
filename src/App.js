@@ -114,12 +114,11 @@ class App extends Component{
   render()
   {
     return (
-      <div className="App">
-       <h1 >Resource Management App</h1>
-       <Navbar/>
-       <Dashboard addNewEmployee={this.addNewEmployee} editEmployee={this.editEmployee} pageNo={this.state.pageNo}
+      <div className="App container">
+       <Navbar/>       <Dashboard addNewEmployee={this.addNewEmployee} editEmployee={this.editEmployee} pageNo={this.state.pageNo}
        deleteEmployeeFun={this.deleteEmployeeFun} employees={this.state.searchEmployees} searchResultFun={this.searchResultFun}/>
        <PageButton showPage={this.showPage} pageNo={this.state.pageNo} /> 
+       
       </div>
     );
   }
