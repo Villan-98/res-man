@@ -2,10 +2,15 @@ import React,{ Component } from 'react'
 import Row from '../components/Row'
 import {Table} from 'react-bootstrap'
 
-function EmployeeTable ({employees,editEmployee,deleteEmployeeFun}){
-		
-		let rows=employees.map(emp=>
-
+function EmployeeTable ({employees,editEmployee,deleteEmployeeFun,pageNo}){
+		let tempEmp=[]
+		let count=5*(pageNo-1)
+		for(let i=count;i<count+5 && i<employees.length;i++)
+		{
+			console.log(i)
+			tempEmp.push(employees[i])
+		}
+		let rows=tempEmp.map(emp=>
 						<Row key={emp.id} empDetail={emp} editEmployee={editEmployee}  deleteEmployeeFun={deleteEmployeeFun}></Row>
 		)
 		return (

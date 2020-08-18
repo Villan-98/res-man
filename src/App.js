@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import './App.css';
 import Navbar from './components/Navbar'
 import Dashboard from './containers/Dashboard'
+import PageButton from './components/PageButton'
 class App extends Component{
   constructor()
   {
@@ -10,13 +11,14 @@ class App extends Component{
       console.log(localStorage.employees)
       if(localStorage.employees===undefined)
       {
-        this.state={employees:[],searchEmployees:[]}
+        this.state={employees:[],searchEmployees:[],pageNo:1}
       }
       else
       {
-            this.state={
+          this.state={
           employees:JSON.parse(localStorage.employees),
-          searchEmployees:JSON.parse(localStorage.employees)
+          searchEmployees:JSON.parse(localStorage.employees),
+          pageNo:1
         }
       } 
   }
@@ -25,7 +27,6 @@ class App extends Component{
     let empData=this.state.employees
     empData.unshift(data) 
     alert("Employee Detail added successfuly")
-    this.updateLocalStorage();
     this.sortByAvailability(empData);
   }
   updateLocalStorage=()=>{
@@ -100,8 +101,15 @@ class App extends Component{
     console.log(data)
     this.setState({
       employees:data,
-      searchEmployees:data
+      searchEmployees:data,
     },this.updateLocalStorage)
+  }
+  showPage=(data)=>
+  {
+      console.log("show page")
+      this.setState({
+        pageNo:data.pno
+      })
   }
   render()
   {
@@ -109,8 +117,9 @@ class App extends Component{
       <div className="App">
        <h1 >Resource Management App</h1>
        <Navbar/>
-       <Dashboard addNewEmployee={this.addNewEmployee} editEmployee={this.editEmployee} 
+       <Dashboard addNewEmployee={this.addNewEmployee} editEmployee={this.editEmployee} pageNo={this.state.pageNo}
        deleteEmployeeFun={this.deleteEmployeeFun} employees={this.state.searchEmployees} searchResultFun={this.searchResultFun}/>
+       <PageButton showPage={this.showPage} pageNo={this.state.pageNo} /> 
       </div>
     );
   }

@@ -3,7 +3,7 @@ import React ,{Component,Fragment}from 'react'
 import EmployeeTable from './EmployeeTable'
 import Summary from '../components/Summary'
 
-function Dashboard({employees,addNewEmployee,deleteEmployeeFun,editEmployee,searchResultFun}){
+function Dashboard({employees,addNewEmployee,deleteEmployeeFun,editEmployee,searchResultFun,pageNo}){
 		return (
 			<>
 				<div className="container-fluid">
@@ -12,7 +12,7 @@ function Dashboard({employees,addNewEmployee,deleteEmployeeFun,editEmployee,sear
 							<div className="question-dashboard">
 							​<Summary employees={employees} addNewEmployee={addNewEmployee} availableEmployee={(employees.filter(emp=>emp.availability)).length} searchResultFun={searchResultFun}/>
 								<div className="table-responsive mt-3 mt-md-4 mb-2">
-									<EmployeeTable editEmployee={editEmployee} deleteEmployeeFun={deleteEmployeeFun}employees={employees}/>
+									<EmployeeTable editEmployee={editEmployee} deleteEmployeeFun={deleteEmployeeFun}employees={employees} pageNo={pageNo}/>
 								</div>
 							</div>
 						</div>
