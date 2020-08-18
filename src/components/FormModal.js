@@ -24,11 +24,13 @@ class FormModal extends Component
 
 			joiningDate:props.editEmployee? props.empDetail.joiningDate:"",
 
-			availability:true,
+			availability:this.props.editEmployee? this.props.empDetail.availability:true,
 
-			buttonName:props.editEmployee?"Edit":"Add Employee",
+			modalButtonName:props.editEmployee?"Edit":"Add Employee",
 
 			modalHeading:props.editEmployee?"Edit Detail":"Add Employee",
+
+			submitButtonName:props.editEmployee?"Update Detail":"Add Employee",
 
 			employeeData:props.employees,
 		
@@ -96,6 +98,26 @@ class FormModal extends Component
   			department:e.target.value
   		})
   	}
+  	setBackValue()
+  	{
+  		this.setState({
+  			show:false,
+
+			name:this.props.editEmployee? this.props.empDetail.name:"",
+
+			gender:this.props.editEmployee? this.props.empDetail.gender:"",
+
+			age:this.props.editEmployee? this.props.empDetail.age:0,
+
+			designation:this.props.editEmployee? this.props.empDetail.designation:"",
+
+			department:this.props.editEmployee? this.props.empDetail.department:"",
+
+			joiningDate:this.props.editEmployee? this.props.empDetail.joiningDate:"",
+
+			
+  		})
+  	}
   	handleSave(e)
   	{
   		if(this.state.name.length===0 || this.state.department.length==0||this.state.designation.length===0
@@ -121,9 +143,7 @@ class FormModal extends Component
   			'gender':this.state.gender
 
 	  		})
-	  		this.setState({
-	  			show:false
-	  		})
+	  		this.setBackValue();
   		}
   		
   	}
@@ -132,7 +152,7 @@ class FormModal extends Component
   		console.log("in the update")
   		this.props.editEmployeeFun({
   			'name':this.state.name,
-  			'availability':true,
+  			'availability':this.state.availability,
   			'department':this.state.department,
   			'joiningDate':this.state.joiningDate,
   			'designation':this.state.designation,
@@ -140,9 +160,7 @@ class FormModal extends Component
   			'id':this.state.id,
   			'gender':this.state.gender
   		})
-  		this.setState({
-  			show:false
-  		})
+  		this.setBackValue()
   	}
 
   	render()
@@ -150,7 +168,7 @@ class FormModal extends Component
   		return (
 		    <>
 		      <Button variant="primary" onClick={this.handleShow}>
-		        {this.state.buttonName}
+		        {this.state.modalButtonName}
 		      </Button>
 
 		      <Modal show={this.state.show} onHide={this.handleClose}>
@@ -207,7 +225,7 @@ class FormModal extends Component
 		        </Modal.Body>
 		        <Modal.Footer>
 		          <Button variant="success" onClick={this.props.editEmployee? this.handleUpdate:this.handleSave}>
-		            Success
+		            {this.state.submitButtonName}
 		          </Button>
 		          <Button variant="danger" onClick={this.handleClose}>
 		            Close
